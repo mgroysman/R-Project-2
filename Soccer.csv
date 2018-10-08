@@ -1,0 +1,71 @@
+Div,Date,HomeTeam,AwayTeam,FTHG,FTAG,FTR,HTHG,HTAG,HTR,Referee
+E0,10/8/2018,Man United,Leicester,2,1,H,1,0,H,A Marriner
+E0,11/8/2018,Bournemouth,Cardiff,2,0,H,1,0,H,K Friend
+E0,11/8/2018,Fulham,Crystal Palace,0,2,A,0,1,A,M Dean
+E0,11/8/2018,Huddersfield,Chelsea,0,3,A,0,2,A,C Kavanagh
+E0,11/8/2018,Newcastle,Tottenham,1,2,A,1,2,A,M Atkinson
+E0,11/8/2018,Watford,Brighton,2,0,H,1,0,H,J Moss
+E0,11/8/2018,Wolves,Everton,2,2,D,1,1,D,C Pawson
+E0,12/8/2018,Arsenal,Man City,0,2,A,0,1,A,M Oliver
+E0,12/8/2018,Liverpool,West Ham,4,0,H,2,0,H,A Taylor
+E0,12/8/2018,Southampton,Burnley,0,0,D,0,0,D,G Scott
+E0,18/08/18,Cardiff,Newcastle,0,0,D,0,0,D,C Pawson
+E0,18/08/18,Chelsea,Arsenal,3,2,H,2,2,D,M Atkinson
+E0,18/08/18,Everton,Southampton,2,1,H,2,0,H,L Mason
+E0,18/08/18,Leicester,Wolves,2,0,H,2,0,H,M Dean
+E0,18/08/18,Tottenham,Fulham,3,1,H,1,0,H,A Taylor
+E0,18/08/18,West Ham,Bournemouth,1,2,A,1,0,H,S Attwell
+E0,19/08/18,Brighton,Man United,3,2,H,3,1,H,K Friend
+E0,19/08/18,Burnley,Watford,1,3,A,1,1,D,P Tierney
+E0,19/08/18,Man City,Huddersfield,6,1,H,3,1,H,A Marriner
+E0,20/08/18,Crystal Palace,Liverpool,0,2,A,0,1,A,M Oliver
+E0,25/08/18,Arsenal,West Ham,3,1,H,1,1,D,G Scott
+E0,25/08/18,Bournemouth,Everton,2,2,D,0,0,D,L Probert
+E0,25/08/18,Huddersfield,Cardiff,0,0,D,0,0,D,M Oliver
+E0,25/08/18,Liverpool,Brighton,1,0,H,1,0,H,C Kavanagh
+E0,25/08/18,Southampton,Leicester,1,2,A,0,0,D,J Moss
+E0,25/08/18,Wolves,Man City,1,1,D,0,0,D,M Atkinson
+E0,26/08/18,Fulham,Burnley,4,2,H,3,2,H,D Coote
+E0,26/08/18,Newcastle,Chelsea,1,2,A,0,0,D,P Tierney
+E0,26/08/18,Watford,Crystal Palace,2,1,H,0,0,D,A Taylor
+E0,27/08/18,Man United,Tottenham,0,3,A,0,0,D,C Pawson
+E0,1/9/2018,Brighton,Fulham,2,2,D,0,1,A,L Probert
+E0,1/9/2018,Chelsea,Bournemouth,2,0,H,0,0,D,L Mason
+E0,1/9/2018,Crystal Palace,Southampton,0,2,A,0,0,D,M Atkinson
+E0,1/9/2018,Everton,Huddersfield,1,1,D,1,1,D,S Attwell
+E0,1/9/2018,Leicester,Liverpool,1,2,A,0,2,A,P Tierney
+E0,1/9/2018,Man City,Newcastle,2,1,H,1,1,D,K Friend
+E0,1/9/2018,West Ham,Wolves,0,1,A,0,0,D,C Kavanagh
+E0,2/9/2018,Burnley,Man United,0,2,A,0,2,A,J Moss
+E0,2/9/2018,Cardiff,Arsenal,2,3,A,1,1,D,A Taylor
+E0,2/9/2018,Watford,Tottenham,2,1,H,0,0,D,A Marriner
+E0,15/09/18,Bournemouth,Leicester,4,2,H,3,0,H,C Pawson
+E0,15/09/18,Chelsea,Cardiff,4,1,H,2,1,H,J Moss
+E0,15/09/18,Huddersfield,Crystal Palace,0,1,A,0,1,A,L Mason
+E0,15/09/18,Man City,Fulham,3,0,H,2,0,H,S Attwell
+E0,15/09/18,Newcastle,Arsenal,1,2,A,0,0,D,L Probert
+E0,15/09/18,Tottenham,Liverpool,1,2,A,0,1,A,M Oliver
+E0,15/09/18,Watford,Man United,1,2,A,0,2,A,M Dean
+E0,16/09/18,Everton,West Ham,1,3,A,1,2,A,M Atkinson
+E0,16/09/18,Wolves,Burnley,1,0,H,0,0,D,A Marriner
+E0,17/09/18,Southampton,Brighton,2,2,D,1,0,H,A Taylor
+E0,22/09/18,Brighton,Tottenham,1,2,A,0,1,A,C Kavanagh
+E0,22/09/18,Burnley,Bournemouth,4,0,H,2,0,H,A Taylor
+E0,22/09/18,Cardiff,Man City,0,5,A,0,3,A,M Oliver
+E0,22/09/18,Crystal Palace,Newcastle,0,0,D,0,0,D,A Marriner
+E0,22/09/18,Fulham,Watford,1,1,D,0,1,A,M Atkinson
+E0,22/09/18,Leicester,Huddersfield,3,1,H,1,1,D,D Coote
+E0,22/09/18,Liverpool,Southampton,3,0,H,3,0,H,P Tierney
+E0,22/09/18,Man United,Wolves,1,1,D,1,0,H,K Friend
+E0,23/09/18,Arsenal,Everton,2,0,H,0,0,D,J Moss
+E0,23/09/18,West Ham,Chelsea,0,0,D,0,0,D,M Dean
+E0,29/09/18,Arsenal,Watford,2,0,H,0,0,D,A Taylor
+E0,29/09/18,Chelsea,Liverpool,1,1,D,1,0,H,A Marriner
+E0,29/09/18,Everton,Fulham,3,0,H,0,0,D,R East
+E0,29/09/18,Huddersfield,Tottenham,0,2,A,0,2,A,C Pawson
+E0,29/09/18,Man City,Brighton,2,0,H,1,0,H,L Mason
+E0,29/09/18,Newcastle,Leicester,0,2,A,0,1,A,S Hooper
+E0,29/09/18,West Ham,Man United,3,1,H,2,0,H,M Oliver
+E0,29/09/18,Wolves,Southampton,2,0,H,0,0,D,S Attwell
+E0,30/09/18,Cardiff,Burnley,1,2,A,0,0,D,M Atkinson
+E0,1/10/2018,Bournemouth,Crystal Palace,2,1,H,1,0,H,M Dean

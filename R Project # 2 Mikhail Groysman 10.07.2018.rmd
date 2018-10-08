@@ -1,0 +1,298 @@
+---
+title: "R Project #2 10.06.2018"
+Author: Mikhail Groysman
+output: html_document
+---
+
+Data #1
+
+Source of data is International Monetary Fund; "World Economic Outlook"; GDP by country; 
+https://www.imf.org/external/pubs/ft/weo/2018/01/weodata/
+
+The data is wide.
+
+The data layout is a typical wide one. Columns are years. I will transpose years to make data long. 
+
+First step would be to read data in
+
+```{r}
+
+gdp_data<-read.csv(file="C://Data/WEO_Data GDP.csv")
+
+head(gdp_data)
+
+```
+
+Next, let's install tidyr and dplyr libraries.
+
+```{r}
+
+#install.packages("tidyr")
+
+library("tidyr")
+
+library("dplyr")
+
+```
+
+Next we will rename the first and the last columns and delete 2, 3, 4, and 5 columns, which do not contain critical information (columns are repetetive and rudant). Getting rid of these columns will allow us to make dataset more managable. We also need to convert GDP values to numeric, but we have to be careful with commas.
+
+```{r}
+
+gdp_data1<-rename(gdp_data, "Country"="ï..Country","EstimateStartYr"="Estimates.Start.After")
+
+gdp_data2<-select(gdp_data1,-c("Subject.Descriptor","Units","Scale","Country.Series.specific.Notes"))
+
+gdp_data2[2:9] <- lapply(gdp_data2[2:9], function(x) as.numeric(as.character(gsub("\\,", "",x))))
+
+head(gdp_data2)
+
+```
+
+ Let's transpose years into a row.
+
+```{r}
+
+gdp_data3 <- gdp_data2 %>% gather(Year, GDP, -c("Country","EstimateStartYr"))
+
+head(gdp_data1)
+
+```
+
+Next we will reformat Year column by getiing rid of X in front. We will also delete NA in GDP column. And we will resort by country and year
+
+```{r}
+
+gdp_data3$Year<-substring(gdp_data3$Year,2,5)
+
+gdp_data3<-filter(gdp_data3,GDP!="NA")
+
+gdp_data4<-gdp_data3 %>% arrange(Country, Year)
+
+head(gdp_data4)
+
+```
+
+We will calculate mean of gdp, and mean of gdp by country, and mean of gdp by year, min values, max values, count of countries
+
+```{r}
+
+summarize(gdp_data4, Mean_GDP_billions = mean(GDP, na.rm = T))
+
+summarize(gdp_data4, Max_GDP_billions = max(GDP))
+
+GroupCountry <- group_by(gdp_data4, Country)
+
+summarize(GroupCountry,mean_GDP_billions=mean(GDP,na.rm=T))
+
+GroupYear <- group_by(gdp_data4, Year)
+
+summarize(GroupYear,mean_GDP_billions=mean(GDP,na.rm=T))
+
+summarize(GroupYear,number_year=n())
+
+summarize(GroupYear,min_year=min(GDP))
+
+summarize(GroupYear,max_year=max(GDP))
+
+```
+
+Mean GDP for all countries for all years in the dataset (2015-2022) is less than GDP of NYC
+
+Max GDP is GDP of USA, of course. Even so China is catching up fast
+
+Mean GDP will increase from 388 billion in 2015 to projected 525 in 2022, a pretty sharp increase which would indicate strong world economy (it could also be due to the weaking of dollar)
+
+
+
+
+Data #2
+
+Source of data is Football (soccer) data used for betting. http://www.football-data.co.uk/englandm.php
+
+The data is wide. Please note that I have deleted most columns to make data more managable.
+
+Columns represent measurments of match. I will transpose them to make data long. 
+
+First step would be to read data in
+
+```{r}
+
+soccer_data<-read.csv(file="C://Data/Soccer.csv")
+
+head(soccer_data)
+
+```
+
+Next we will rename columns to make dataset more readible. We will delete columns HTHG, HTAG, and HTR, which show Half Time results, as well as column referee. For our analysis, it does not matter who referee is.
+
+```{r}
+
+soccer_data1<-rename(soccer_data,"HomeTeamGoals"="FTHG", "AwayTeamGoals"="FTAG", "WinningTeam"="FTR")
+
+soccer_data2<-select(soccer_data1,-c("HTHG","HTAG","HTR","Referee"))
+
+head(soccer_data2)
+
+```
+
+Now it is time to transpose our data. We will transpose teams.
+
+```{r}
+
+soccer_data3 <- soccer_data2 %>% gather(TeamOrigin, Team, c("HomeTeam","AwayTeam"))
+
+head(soccer_data3)
+
+```
+
+Next we will create new column which will show how many goals a team scored. And also we will create a column to show if a team won (1) or lost (0).
+
+```{r}
+
+soccer_data4 <- mutate(soccer_data3, GoalScored = ifelse(TeamOrigin == 'HomeTeam', HomeTeamGoals,         AwayTeamGoals))
+
+soccer_data5 <- mutate(soccer_data4, Outcome = ifelse(TeamOrigin == 'HomeTeam' & WinningTeam=='H',1,    ifelse(TeamOrigin == 'HomeTeam' & WinningTeam=='A',0,ifelse(WinningTeam=='A',1,0))))
+
+
+head(soccer_data5)
+
+```
+
+Now, after we created new columns, we no more need columns HomeTeamGoals, AwayTeamGoals, WinningTeam, and TeamOrigin, so we will delete them
+
+```{r}
+
+soccer_data6<-select(soccer_data5,-c("HomeTeamGoals","AwayTeamGoals","WinningTeam","TeamOrigin"))
+
+head(soccer_data6)
+
+```
+
+Now it is time to analyze the data. We will calculate the mean of goals for all teams for all games. Also, we will calculate maximim goals scored by any time for any match. We will calculate mean by outcome (win/loss). And finally we will calculate mean by team.
+
+```{r}
+
+summarize(soccer_data6, Mean_goals = mean(GoalScored, na.rm = T))
+
+summarize(soccer_data6, Max_goals = max(GoalScored))
+
+GroupOutcome <- group_by(soccer_data6, Outcome)
+
+summarize(GroupOutcome,mean_goals_by_outcome=mean(GoalScored,na.rm=T))
+
+GroupTeam <- group_by(soccer_data6, Team)
+
+summarize(GroupTeam,mean_goals_by_team=mean(GoalScored,na.rm=T))
+```
+So, on avarage a team scores 1.4 goals per game. It looks reasonable, soccer has low output.
+
+Maximum goals scored by any team was 6. It looks right.
+
+Losing team scored on average 0.7 goals and winning 2.5.
+
+Manchaster City is doing good they are scoring 3 goals per game, while Huddersfield is not performing well with only 0.4 goals per game
+
+
+
+
+Data #3
+
+Source of data is US Census, USA Counties Data File Downloads. https://www.census.gov/support/USACdataDownloads.html
+
+The data is wide. Please note that I have deleted most columns to make data more managable.
+
+Columns represent number of farms by year. I will transpose them to make data long. 
+
+First step would be to read data in:
+
+
+```{r}
+
+agri_data<-read.csv(file="C://Data/Agriculture.csv")
+
+head(agri_data)
+
+```
+
+ Data is unreadible. So we will rename columns. We will delete columns ending with F, N1, and N2 which indicate additional information we do not need for our analysis. We would need column ending with D (data)
+
+```{r}
+
+agri_data1<-rename(agri_data,"1997"="AGN020197D","2002"="AGN020202D","StateCountyCode"="STCOU", "AreaName"="ï..Areaname")
+
+agri_data2<-select(agri_data1,c("AreaName","StateCountyCode","1997","2002"))
+
+head(agri_data2)
+
+```
+
+Our data has totals and subtotals, we need to delete them
+
+```{r}
+
+agri_data3<-filter(agri_data2, AreaName!=toupper(AreaName))
+
+head(agri_data3)
+
+```
+
+Now it is time to transpose our data. We will transpose years.
+
+```{r}
+
+agri_data4 <- agri_data3 %>% gather(Year, Farms, c("1997","2002"))
+
+head(agri_data4)
+
+```
+
+It looks like we need to widen our data - we will split area into State and County
+
+```{r}
+
+agri_data5 <- agri_data4 %>% separate(AreaName, c("County","State"),",")
+
+head(agri_data5)
+
+```
+
+We will calculate:
+
+  1) farms by state in 2002
+  2) average farms by year
+  3) the lowest number of farms in county
+  4) number of counties with 0 farms in 2002
+  5) the higest number of farm in county
+  6) total # of farms by year
+
+
+
+```{r}
+
+GroupState <- group_by(filter(agri_data5,Year==2002), State)
+
+arrange(summarize(GroupState,farms_by_state=sum(Farms)),farms_by_state)
+
+GroupYear <- group_by(agri_data5, Year)
+
+summarize(GroupYear,mean_farms_by_year=mean(Farms))
+
+summarize(agri_data5,min_farms_county=min(Farms))
+
+summarize(filter(agri_data5,Year==2002&Farms==0),num_county=n())
+
+summarize(filter(agri_data5,Year==2002),max_farms_county=max(Farms))
+
+summarize(GroupYear,farms_by_year=sum(Farms))
+
+tail(arrange(filter(agri_data5,Year==2002), Farms))
+```
+
+In 2002, Alaska had 609 farms, and Texas had almost 229K
+
+On average, a county in USA had 608 farms in 1997 and suprisingly increasing 677 farms in 2002
+
+There were counties with no farms in USA. Actually in 2002, there were 70 counties with no farms
+
+In 2002, there was one county with 6,281 counties (Fresno, CA)
